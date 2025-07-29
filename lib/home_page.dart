@@ -3,7 +3,6 @@ import 'term1_page.dart';
 import 'term2_page.dart';
 import 'term3_page.dart';
 import 'term4_page.dart';
-import 'term5_page.dart';
 import 'learning_outcome_page.dart';
 import 'profile_page.dart';
 
@@ -12,63 +11,74 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final List<Map<String, dynamic>> menuItems = [
+      {'title': 'ปี 1 เทอม 1', 'icon': Icons.book, 'page': const Term1Page()},
+      {
+        'title': 'ปี 1 เทอม 2',
+        'icon': Icons.menu_book,
+        'page': const Term2Page(),
+      },
+      {'title': 'ปี 2 เทอม 1', 'icon': Icons.school, 'page': const Term3Page()},
+      {'title': 'ปี 2 เทอม 2', 'icon': Icons.grade, 'page': const Term4Page()},
+
+      {
+        'title': 'ผลลัพธ์การเรียนรู้',
+        'icon': Icons.assessment,
+        'page': const LearningOutcomePage(),
+      },
+      {
+        'title': 'โปรไฟล์ส่วนตัว',
+        'icon': Icons.person,
+        'page': const ProfilePage(),
+      },
+    ];
+
     return Scaffold(
-      appBar: AppBar(title: Text('Home Page')),
-      body: ListView(
-        padding: EdgeInsets.all(16),
-        children: [
-          Text('ยินดีต้อนรับสู่หน้าแรก', style: TextStyle(fontSize: 20)),
-          SizedBox(height: 16),
-          ElevatedButton(
-            child: Text('ปี 1 เทอม 1'),
-            onPressed: () => Navigator.push(
-              context,
-              MaterialPageRoute(builder: (_) => Term1Page()),
+      appBar: AppBar(
+        title: const Text('🏠 หน้าแรก'),
+        backgroundColor: Colors.teal,
+      ),
+      body: Padding(
+        padding: const EdgeInsets.all(16),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const Text(
+              'ยินดีต้อนรับ 👋',
+              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
             ),
-          ),
-          ElevatedButton(
-            child: Text('ปี 1 เทอม 2'),
-            onPressed: () => Navigator.push(
-              context,
-              MaterialPageRoute(builder: (_) => Term2Page()),
+            const SizedBox(height: 16),
+            Expanded(
+              child: ListView.builder(
+                itemCount: menuItems.length,
+                itemBuilder: (context, index) {
+                  final item = menuItems[index];
+                  return Card(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    elevation: 4,
+                    margin: const EdgeInsets.symmetric(vertical: 8),
+                    child: ListTile(
+                      leading: Icon(item['icon'], color: Colors.teal, size: 30),
+                      title: Text(
+                        item['title'],
+                        style: const TextStyle(fontSize: 18),
+                      ),
+                      trailing: const Icon(Icons.arrow_forward_ios),
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (_) => item['page']),
+                        );
+                      },
+                    ),
+                  );
+                },
+              ),
             ),
-          ),
-          ElevatedButton(
-            child: Text('ปี 2 เทอม 1'),
-            onPressed: () => Navigator.push(
-              context,
-              MaterialPageRoute(builder: (_) => Term3Page()),
-            ),
-          ),
-          ElevatedButton(
-            child: Text('ปี 2 เทอม 2'),
-            onPressed: () => Navigator.push(
-              context,
-              MaterialPageRoute(builder: (_) => Term4Page()),
-            ),
-          ),
-          ElevatedButton(
-            child: Text('ปี 3 เทอม 1'),
-            onPressed: () => Navigator.push(
-              context,
-              MaterialPageRoute(builder: (_) => Term5Page()),
-            ),
-          ),
-          ElevatedButton(
-            child: Text('ผลลัพธ์การเรียนรู้'),
-            onPressed: () => Navigator.push(
-              context,
-              MaterialPageRoute(builder: (_) => LearningOutcomePage()),
-            ),
-          ),
-          ElevatedButton(
-            child: Text('โปรไฟล์ส่วนตัว'),
-            onPressed: () => Navigator.push(
-              context,
-              MaterialPageRoute(builder: (_) => ProfilePage()),
-            ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

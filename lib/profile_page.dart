@@ -6,22 +6,55 @@ class ProfilePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('โปรไฟล์ส่วนตัว')),
+      appBar: AppBar(
+        title: const Text('👤 โปรไฟล์ส่วนตัว'),
+        backgroundColor: Colors.teal,
+      ),
       body: Padding(
-        padding: EdgeInsets.all(16),
+        padding: const EdgeInsets.all(20),
         child: Column(
           children: [
             const CircleAvatar(
               radius: 60,
-              backgroundImage: AssetImage(
-                'assets/profile.jpeg',
-              ), // ตรงกับ path และชื่อไฟล์
+              backgroundImage: AssetImage('assets/image/profile.jpeg'),
             ),
-            SizedBox(height: 10),
-            Text('ชื่อ: นายภัทรดนัย เตจาคำ', style: TextStyle(fontSize: 18)),
-            Text('รหัสประจำตัว : 66543210024-6'),
-            Text('ความสามารถพิเศษ: Coding, วาดรูป ,FontEnd, Produces Music'),
-            Text('ความชอบ: ฟังเพลง, ออกแบบ UI'),
+            const SizedBox(height: 16),
+            const Text(
+              'นายภัทรดนัย เตจาคำ',
+              style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+            ),
+            const SizedBox(height: 4),
+            const Text(
+              'รหัสประจำตัว: 66543210024-6',
+              style: TextStyle(fontSize: 16, color: Colors.grey),
+            ),
+            const SizedBox(height: 20),
+            Card(
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(12),
+              ),
+              elevation: 4,
+              child: Padding(
+                padding: const EdgeInsets.all(16),
+                child: Column(
+                  children: const [
+                    ListTile(
+                      leading: Icon(Icons.star, color: Colors.teal),
+                      title: Text('ความสามารถพิเศษ'),
+                      subtitle: Text(
+                        'Coding, วาดรูป, FrontEnd, Produces Music',
+                      ),
+                    ),
+                    Divider(),
+                    ListTile(
+                      leading: Icon(Icons.favorite, color: Colors.teal),
+                      title: Text('ความชอบ'),
+                      subtitle: Text('ฟังเพลง, ออกแบบ UI'),
+                    ),
+                  ],
+                ),
+              ),
+            ),
           ],
         ),
       ),
